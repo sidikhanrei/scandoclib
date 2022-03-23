@@ -43,7 +43,7 @@
             android:singleLine="true"
             android:text="Gray"
             android:textColor="@android:color/white"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/BWMode"
@@ -55,7 +55,7 @@
             android:singleLine="true"
             android:text="B &amp; W"
             android:textColor="@android:color/white"
-            tools:visibility="gone" />
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/rotanticButton"
@@ -66,8 +66,7 @@
             android:drawableTop="@drawable/ic_rotac"
             android:singleLine="true"
             android:text="Left"
-            android:textColor="@android:color/white"
-            tools:visibility="gone" />
+            android:textColor="@android:color/white" />
 
         <Button
             android:id="@+id/rotcButton"
@@ -78,8 +77,7 @@
             android:drawableTop="@drawable/ic_rotc"
             android:singleLine="true"
             android:text="Right"
-            android:textColor="@android:color/white"
-            tools:visibility="gone" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 
