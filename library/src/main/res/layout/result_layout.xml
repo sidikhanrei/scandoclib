@@ -51,7 +51,10 @@
         android:layout_above="@id/doneButton"
         android:layout_below="@id/topBar"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/scanPadding">
+        android:layout_marginStart="@dimen/scanPadding"
+        android:layout_marginTop="@dimen/scanPadding"
+        android:layout_marginEnd="@dimen/scanPadding"
+        android:layout_marginBottom="@dimen/scanPadding">
 
         <ImageView
             android:id="@+id/scannedImage"

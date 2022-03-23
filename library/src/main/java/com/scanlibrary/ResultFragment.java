@@ -63,16 +63,35 @@ public class ResultFragment extends Fragment {
 //        rotcButton.setOnClickListener(new ResultFragment.RotclockButtonClickListener());
 
         Bitmap bitmap = getBitmap();
-//        transformed = bitmap;
+        transformed = bitmap;
 
         /**
          * DX REPLACE - AUTO MAGIC
          */
-        try {
-            transformed = ((ScanActivity) getActivity()).getMagicColorBitmap(rotoriginal);
-        } catch (final OutOfMemoryError e) {
-            transformed = bitmap;
-        }
+        showProgressDialog(getResources().getString(R.string.applying_filter));
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    transformed = ((ScanActivity) getActivity()).getMagicColorBitmap(rotoriginal);
+                } catch (final OutOfMemoryError e) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            transformed = original;
+                            scannedImageView.setImageBitmap(original);
+                        }
+                    });
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        scannedImageView.setImageBitmap(transformed);
+                        dismissDialog();
+                    }
+                });
+            }
+        });
 
         rotoriginal = bitmap;
         setScannedImage(bitmap);
