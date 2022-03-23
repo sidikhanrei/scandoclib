@@ -73,6 +73,32 @@ public class ResultFragment extends Fragment {
         /**
          * DX REPLACE - AUTO MAGIC
          */
+        showProgressDialog(getResources().getString(R.string.applying_filter));
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    transformed = ((ScanActivity) getActivity()).getBWBitmap(rotoriginal);
+                } catch (final OutOfMemoryError e) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            transformed = original;
+                            scannedImageView.setImageBitmap(original);
+                            e.printStackTrace();
+                            dismissDialog();
+                        }
+                    });
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        scannedImageView.setImageBitmap(transformed);
+                        dismissDialog();
+                    }
+                });
+            }
+        });
 
     }
 
