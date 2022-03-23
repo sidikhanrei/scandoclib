@@ -65,38 +65,15 @@ public class ResultFragment extends Fragment {
         Bitmap bitmap = getBitmap();
         transformed = bitmap;
 
-        /**
-         * DX REPLACE - AUTO MAGIC
-         */
-        showProgressDialog(getResources().getString(R.string.applying_filter));
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    transformed = ((ScanActivity) getActivity()).getMagicColorBitmap(rotoriginal);
-                } catch (final OutOfMemoryError e) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            transformed = original;
-                            scannedImageView.setImageBitmap(original);
-                        }
-                    });
-                }
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        scannedImageView.setImageBitmap(transformed);
-                        dismissDialog();
-                    }
-                });
-            }
-        });
-
         rotoriginal = bitmap;
         setScannedImage(bitmap);
         doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new DoneButtonClickListener());
+
+        /**
+         * DX REPLACE - AUTO MAGIC
+         */
+
     }
 
     private Bitmap getBitmap() {
