@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/scanlibrary-ver-5.x.x.iml" filepath="$PROJECT_DIR$/.idea/modules/scanlibrary-ver-5.x.x.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.main.iml" filepath="$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/library/scanlibrary-ver-5.x.x.library.unitTest.iml" />
+    </modules>
+  </component>
+</project>
