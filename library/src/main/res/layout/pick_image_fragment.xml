@@ -20,7 +20,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/gallery" />
+            android:src="@drawable/gallery"
+            android:visibility="gone" />
 
         <ImageButton
             android:id="@+id/cameraButton"
