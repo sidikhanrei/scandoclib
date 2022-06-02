@@ -11,6 +11,11 @@
         android:layout_height="fill_parent"
         >
 
+        <!-- this is your preview - whatever it looks like -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        
         <!-- overlay - customize padding and stuff  -->
         <View
             android:layout_margin="32px"
