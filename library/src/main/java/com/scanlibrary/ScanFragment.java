@@ -110,19 +110,15 @@ public class ScanFragment extends Fragment {
     private Map<Integer, PointF> getEdgePoints(Bitmap tempBitmap) {
         try {
             tempBitmap = ((ScanActivity) getActivity()).getMagicColorBitmap(tempBitmap);
-        } catch (final OutOfMemoryError e) {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    e.printStackTrace();
-                    dismissDialog();
-                }
-            });
-        }
 
-        List<PointF> pointFs = getContourEdgePoints(tempBitmap);
-        Map<Integer, PointF> orderedPoints = orderedValidEdgePoints(tempBitmap, pointFs);
-        return orderedPoints;
+            List<PointF> pointFs = getContourEdgePoints(tempBitmap);
+            Map<Integer, PointF> orderedPoints = orderedValidEdgePoints(tempBitmap, pointFs);
+            return orderedPoints;
+        } catch (final OutOfMemoryError e) {
+            List<PointF> pointFs = getContourEdgePoints(tempBitmap);
+            Map<Integer, PointF> orderedPoints = orderedValidEdgePoints(tempBitmap, pointFs);
+            return orderedPoints;
+        }
     }
 
     private List<PointF> getContourEdgePoints(Bitmap tempBitmap) {
