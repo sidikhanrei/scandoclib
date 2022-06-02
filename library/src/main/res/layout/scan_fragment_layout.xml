@@ -35,6 +35,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true" />
+
+            <!-- overlay - customize padding and stuff  -->
+            <View
+                android:layout_margin="32px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/content"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/rectangle" />
+            
         </FrameLayout>
 
         <com.scanlibrary.PolygonView
