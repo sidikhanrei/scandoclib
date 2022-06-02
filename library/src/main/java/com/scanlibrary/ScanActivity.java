@@ -25,7 +25,7 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
         init();
-        initRect();
+//        initRect();
     }
 
     // https://stackoverflow.com/questions/44628399/android-set-image-overlay-with-background-color-outside-of-bitmap-using-canvas
