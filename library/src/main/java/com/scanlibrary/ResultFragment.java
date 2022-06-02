@@ -69,7 +69,7 @@ public class ResultFragment extends Fragment {
         doneButton = (Button) view.findViewById(R.id.doneButton);
         doneButton.setOnClickListener(new DoneButtonClickListener());
 
-        view.findViewById(R.id.original).performClick();
+        view.findViewById(R.id.grayMode).performClick();
 
         view.findViewById(R.id.doneButton).performClick();
 
