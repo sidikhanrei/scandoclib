@@ -83,57 +83,27 @@ public class ResultFragment extends Fragment {
         try {
             original = Utils.getBitmap(getActivity(), uri);
 
-            // ROTATE BITMAP
-            try {
-                original = getRotateImage(uri.getPath(), original);
-
-                getActivity().getContentResolver().delete(uri, null, null);
-                return original;
-            } catch (IOException e){
-                return null;
+            // ROTATE IF PORTRAIT
+            String rotation = "square";
+            if(original.getWidth() > original.getHeight()){
+                rotation = "landscape";
+            }else if(original.getWidth() < original.getHeight()){
+                rotation = "portrait";
             }
 
+            if(rotation == "portrait"){
+                android.graphics.Matrix matrix = new android.graphics.Matrix();
+                matrix.postRotate(180);
+                original = Bitmap.createBitmap(original, 0, 0, original.getWidth(), original.getHeight(), matrix, true);
+            }
+            // END : ROTATE IF PORTRAIT
+
+            getActivity().getContentResolver().delete(uri, null, null);
+            return original;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static Bitmap getRotateImage(String photoPath, Bitmap bitmap) throws IOException {
-        ExifInterface ei = new ExifInterface(photoPath);
-        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                ExifInterface.ORIENTATION_UNDEFINED);
-
-        Bitmap rotatedBitmap = null;
-        switch (orientation) {
-
-            case ExifInterface.ORIENTATION_ROTATE_90:
-                rotatedBitmap = rotateImage(bitmap, 90);
-                break;
-
-            case ExifInterface.ORIENTATION_ROTATE_180:
-                rotatedBitmap = rotateImage(bitmap, 180);
-                break;
-
-            case ExifInterface.ORIENTATION_ROTATE_270:
-                rotatedBitmap = rotateImage(bitmap, 270);
-                break;
-
-            case ExifInterface.ORIENTATION_NORMAL:
-            default:
-                rotatedBitmap = bitmap;
-        }
-
-        return rotatedBitmap;
-
-    }
-
-
-    public static Bitmap rotateImage(Bitmap source, float angle) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
-                matrix, true);
     }
 
     private Uri getUri() {
