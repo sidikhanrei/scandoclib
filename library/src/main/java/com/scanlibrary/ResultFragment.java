@@ -1,6 +1,7 @@
 package com.scanlibrary;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -85,10 +86,13 @@ public class ResultFragment extends Fragment {
             // ROTATE BITMAP
             try {
                 original = getRotateImage(uri.getPath(), original);
-            } catch (IOException e){}
 
-            getActivity().getContentResolver().delete(uri, null, null);
-            return original;
+                getActivity().getContentResolver().delete(uri, null, null);
+                return original;
+            } catch (IOException e){
+                return null;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
