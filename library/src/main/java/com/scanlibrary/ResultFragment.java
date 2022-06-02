@@ -93,7 +93,7 @@ public class ResultFragment extends Fragment {
 
             if(rotation == "portrait"){
                 android.graphics.Matrix matrix = new android.graphics.Matrix();
-                matrix.postRotate(180);
+                matrix.postRotate(270);
                 original = Bitmap.createBitmap(original, 0, 0, original.getWidth(), original.getHeight(), matrix, true);
             }
             // END : ROTATE IF PORTRAIT
