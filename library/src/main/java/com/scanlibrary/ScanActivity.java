@@ -14,6 +14,8 @@ import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 /**
  * Created by jhansi on 28/03/15.
@@ -25,45 +27,52 @@ public class ScanActivity extends Activity implements IScanner, ComponentCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_layout);
         init();
+        initOverlay();
 //        initRect();
     }
 
     // https://stackoverflow.com/questions/44628399/android-set-image-overlay-with-background-color-outside-of-bitmap-using-canvas
-    private void initRect(){
-        int w = findViewById(R.id.content).getWidth();
-        int h = findViewById(R.id.content).getHeight();
-        int startX = 0;
-        int startY = 10;
-        int cornerRadiusRatio = 5;
+//    private void initRect(){
+//        int w = findViewById(R.id.content).getWidth();
+//        int h = findViewById(R.id.content).getHeight();
+//        int startX = 0;
+//        int startY = 10;
+//        int cornerRadiusRatio = 5;
+//
+//        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+//
+//        Canvas osCanvas = new Canvas(bitmap);
+//
+//        RectF outerRectangle = new RectF(0, 0, w, h);
+//
+//        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        paint.setColor(getResources().getColor(R.color.black));
+//        paint.setAlpha(99);
+//        osCanvas.drawRect(outerRectangle, paint);
+//
+//        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
+//
+//        paint.setColor(Color.TRANSPARENT);
+//        paint.setStyle(Paint.Style.FILL);
+//        RectF r1 = new RectF(
+//                (float) (startX),
+//                (float) (startY),
+//                (float) (w),
+//                (float) (h));
+//
+//        osCanvas.drawRoundRect(r1, (float) (cornerRadiusRatio * h),
+//                (float) (cornerRadiusRatio * h), paint);
+//
+//        paint.setStrokeWidth(2);
+//        paint.setColor(getResources().getColor(R.color.blue));
+//        paint.setStyle(Paint.Style.STROKE);
+//
+//    }
 
-        Bitmap bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-
-        Canvas osCanvas = new Canvas(bitmap);
-
-        RectF outerRectangle = new RectF(0, 0, w, h);
-
-        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(getResources().getColor(R.color.black));
-        paint.setAlpha(99);
-        osCanvas.drawRect(outerRectangle, paint);
-
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
-
-        paint.setColor(Color.TRANSPARENT);
-        paint.setStyle(Paint.Style.FILL);
-        RectF r1 = new RectF(
-                (float) (startX),
-                (float) (startY),
-                (float) (w),
-                (float) (h));
-
-        osCanvas.drawRoundRect(r1, (float) (cornerRadiusRatio * h),
-                (float) (cornerRadiusRatio * h), paint);
-
-        paint.setStrokeWidth(2);
-        paint.setColor(getResources().getColor(R.color.blue));
-        paint.setStyle(Paint.Style.STROKE);
-
+    private void initOverlay(){
+        ScanOverlay overlay = new ScanOverlay(this);
+//        setContentView(overlay);
+        addContentView(overlay, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     private void init() {
