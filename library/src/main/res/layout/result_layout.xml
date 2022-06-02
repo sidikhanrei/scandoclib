@@ -43,7 +43,7 @@
             android:singleLine="true"
             android:text="Gray"
             android:textColor="@android:color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/BWMode"
@@ -55,7 +55,7 @@
             android:singleLine="true"
             android:text="B &amp; W"
             android:textColor="@android:color/white"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <Button
             android:id="@+id/rotanticButton"

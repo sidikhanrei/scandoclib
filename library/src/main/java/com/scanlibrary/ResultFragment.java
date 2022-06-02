@@ -71,7 +71,7 @@ public class ResultFragment extends Fragment {
 
         view.findViewById(R.id.magicColor).performClick();
 
-        view.findViewById(R.id.doneButton).performClick();
+//        view.findViewById(R.id.doneButton).performClick();
 
     }
 
