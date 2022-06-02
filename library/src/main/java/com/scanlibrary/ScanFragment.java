@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -81,7 +82,14 @@ public class ScanFragment extends Fragment {
         Uri uri = getUri();
         try {
             Bitmap bitmap = Utils.getBitmap(getActivity(), uri);
+
+            // ROTATE BITMAP
+            try {
+                bitmap = getRotateImage(uri.getPath(), bitmap);
+            } catch (IOException e){}
+
             getActivity().getContentResolver().delete(uri, null, null);
+
             return bitmap;
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,6 +105,7 @@ public class ScanFragment extends Fragment {
     private void setBitmap(Bitmap original) {
         Bitmap scaledBitmap = scaledBitmap(original, sourceFrame.getWidth(), sourceFrame.getHeight());
         scaledBitmap = ((ScanActivity) getActivity()).getMagicColorBitmap(scaledBitmap);
+
         sourceImageView.setImageBitmap(scaledBitmap);
         Bitmap tempBitmap = ((BitmapDrawable) sourceImageView.getDrawable()).getBitmap();
         Map<Integer, PointF> pointFs = getEdgePoints(tempBitmap);
@@ -196,6 +205,43 @@ public class ScanFragment extends Fragment {
         Log.d("", "POints(" + x1 + "," + y1 + ")(" + x2 + "," + y2 + ")(" + x3 + "," + y3 + ")(" + x4 + "," + y4 + ")");
         Bitmap _bitmap = ((ScanActivity) getActivity()).getScannedBitmap(original, x1, y1, x2, y2, x3, y3, x4, y4);
         return _bitmap;
+    }
+
+    public static Bitmap getRotateImage(String photoPath, Bitmap bitmap) throws IOException {
+        ExifInterface ei = new ExifInterface(photoPath);
+        int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_UNDEFINED);
+
+        Bitmap rotatedBitmap = null;
+        switch (orientation) {
+
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                rotatedBitmap = rotateImage(bitmap, 90);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                rotatedBitmap = rotateImage(bitmap, 180);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_270:
+                rotatedBitmap = rotateImage(bitmap, 270);
+                break;
+
+            case ExifInterface.ORIENTATION_NORMAL:
+            default:
+                rotatedBitmap = bitmap;
+        }
+
+        return rotatedBitmap;
+
+    }
+
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
     }
 
     private class ScanAsyncTask extends AsyncTask<Void, Void, Bitmap> {
